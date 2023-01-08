@@ -9,11 +9,11 @@ class Locations {
   }
   async init() {
     const response = await Promise.all([
-      this.api.countries(),
+      // this.api.countries(),
       this.api.cities(),
     ]);
 
-    const [countries, cities] = response;
+    const [cities] = response;
     // this.countries = this.serializeCountries(countries);
     this.cities = this.serializeCities(cities);
     this.shortCitiesList = this.createShortCities(this.cities);

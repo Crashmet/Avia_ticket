@@ -2,7 +2,6 @@ import {
   getAutocompleteInstance,
   getDatepickerInstance,
 } from '../plugins/materialize';
-import api from '../services/apiService';
 
 class FormUI {
   constructor(autocompleteInstance, datepickerInstance) {
@@ -17,17 +16,7 @@ class FormUI {
     this.destinationAutocomplete = autocompleteInstance(this.destination);
     this.departDatepicker = datepickerInstance(this.depart);
     this.returnDatepicker = datepickerInstance(this.return);
-
-    this.origin.addEventListener('input', (el) => {
-      console.log(el.data);
-      api;
-    });
-    this.destination.addEventListener('input', (el) => {
-      console.log(el.data);
-    });
   }
-
-  // getValueOriginInput
 
   get form() {
     this.$form;

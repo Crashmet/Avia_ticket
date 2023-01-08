@@ -5,49 +5,58 @@ import locations from './store/locations';
 import formUI from './views/form';
 
 document.addEventListener('DOMContentLoaded', () => {
-  const valueOrigin = [];
-  const valuedestination = [];
+  const form = formUI.form;
 
   // Autocomplete events
-  formUI.origin.addEventListener('input', (el) => {
-    if (el.data === null) {
-      valueOrigin.pop();
-    } else {
-      valueOrigin.push(el.data);
-    }
+  formUI.origin.addEventListener('input', (e) => {
+    const origin = formUI.originValue;
 
-    if (!valueOrigin.length) {
+    if (!origin.length) {
       return;
     }
 
-    let value = valueOrigin.join('');
-
-    api.setSearchValue(value);
+    api.setSearchValue(origin);
     initApp();
   });
 
-  formUI.destination.addEventListener('input', (el) => {
-    if (el.data === null) {
-      valuedestination.pop();
-    } else {
-      valuedestination.push(el.data);
-    }
+  formUI.destination.addEventListener('input', (e) => {
+    const destination = formUI.destinationValue;
 
-    if (!valuedestination.length) {
+    if (!destination.length) {
       return;
     }
 
-    let value = valuedestination.join('');
-
-    api.setSearchValue(value);
+    api.setSearchValue(destination);
     initApp();
   });
 
   // Events
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    onFormSubmit();
+  });
 
   // Handlers
   async function initApp() {
     await locations.init();
     formUI.setAutocompleteData(locations.shortCitiesList);
+  }
+
+  async function onFormSubmit() {
+    // собираем формы из инпутов
+    const origin = formUI.originValue;
+    const destination = formUI.destinationValue;
+    const depart_date = formUI.departDateValue;
+    const return_date = formUI.returnDateValue;
+
+    api.getCitiesCode(origin, destination);
+
+    console.log(
+      api.getCitiesCode(origin, destination).then((e) => {
+        console.log(e.destination.iata, e.origin.iata);
+      })
+    );
+
+    console.log(origin, destination, depart_date, return_date);
   }
 });

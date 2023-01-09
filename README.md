@@ -1,8 +1,8 @@
 # Avia Ticket
 ```
-HI, this is my first project on Webpack - [Сlick to see result](https://crashmet.github.io/avia-ticket/dist/index)
+HI, this is my first project on Webpack
 ```
-
+[Сlick to see result](https://crashmet.github.io/avia-ticket/dist/index)
 
 ## Project setup
 ```

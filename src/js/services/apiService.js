@@ -2,7 +2,6 @@ import axios from 'axios';
 import config from '../config/apiConfig';
 
 /**
- * /countries - array of countries
  * /cities - array of cities
  * /prices/cheap - array
  */
@@ -46,7 +45,34 @@ class Api {
     }
   }
 
-  async prices(params) {}
+  async airlines() {
+    try {
+      const response = await axios.get(`${this.url}/airlines`);
+      return response.data;
+    } catch (err) {
+      console.log(err);
+      return Promise.reject(err);
+    }
+  }
+
+  async prices(params) {
+    const {
+      originSityCode: origin,
+      destinationSityCode: destination,
+      depart_date,
+      return_date,
+    } = params;
+
+    try {
+      const response = await axios.get(
+        `http://api.travelpayouts.com/v1/prices/cheap?origin=${origin}&destination=${destination}&depart_date=2${depart_date}&return_date=${return_date}&token=${this.key}`
+      );
+      return response.data;
+    } catch (err) {
+      console.log(err);
+      return Promise.reject(err);
+    }
+  }
 }
 
 const api = new Api(config);

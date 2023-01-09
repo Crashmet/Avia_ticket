@@ -3,10 +3,10 @@ import './plugins';
 import api from './services/apiService';
 import locations from './store/locations';
 import formUI from './views/form';
+import currencyUI from './views/currency';
+import ticketsUI from './views/tickets';
 
 document.addEventListener('DOMContentLoaded', () => {
-  const form = formUI.form;
-
   // Autocomplete events
   formUI.origin.addEventListener('input', (e) => {
     const origin = formUI.originValue;
@@ -30,8 +30,8 @@ document.addEventListener('DOMContentLoaded', () => {
     initApp();
   });
 
-  // Events
-  form.addEventListener('submit', (e) => {
+  // Form event
+  formUI.form.addEventListener('submit', (e) => {
     e.preventDefault();
     onFormSubmit();
   });
@@ -49,14 +49,24 @@ document.addEventListener('DOMContentLoaded', () => {
     const depart_date = formUI.departDateValue;
     const return_date = formUI.returnDateValue;
 
-    api.getCitiesCode(origin, destination);
+    // Получение валюты
+    const currency = currencyUI.currecyValue;
 
-    console.log(
-      api.getCitiesCode(origin, destination).then((e) => {
-        console.log(e.destination.iata, e.origin.iata);
-      })
-    );
+    // получае код города
+    let originSityCode;
+    let destinationSityCode;
 
-    console.log(origin, destination, depart_date, return_date);
+    await api.getCitiesCode(origin, destination).then((e) => {
+      originSityCode = e.origin.iata;
+      destinationSityCode = e.destination.iata;
+    });
+
+    await locations.fetchTickets({
+      originSityCode,
+      destinationSityCode,
+      depart_date,
+      return_date,
+      currency,
+    });
   }
 });

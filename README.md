@@ -1,7 +1,7 @@
 # Avia Ticket
 
 
-[Сlick to see result](https://crashmet.github.io/avia-ticket/dist/index)
+[Сlick to see result](https://crashmet.github.io/Avia_ticket/dist/index)
 --
 ```
 HI, this is my first project on Webpack

@@ -1,6 +1,6 @@
 import api from '../services/apiService';
 
-class Locations {
+export class Locations {
   constructor(api) {
     this.api = api;
     this.countries = null;
@@ -14,6 +14,7 @@ class Locations {
       this.api.cities(),
       // this.api.airlines(),
     ]);
+    console.log(response);
 
     const [cities] = response;
     this.cities = this.serializeCities(cities);
@@ -40,9 +41,7 @@ class Locations {
   }
 
   serializeCities(cities) {
-    //{ 'City name, Country name': {...} }
     return cities.reduce((acc, city) => {
-      console.log(city);
       const key = `${city.name}, ${city.country_name}`;
       acc[city.code] = key;
       return acc;

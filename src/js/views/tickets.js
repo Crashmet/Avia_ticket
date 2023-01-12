@@ -1,4 +1,4 @@
-import currencyUI from '../../../../../../../js/views/currency';
+import currencyUI from './currency';
 
 class TicketsUI {
   constructor(currency) {

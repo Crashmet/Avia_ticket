@@ -4,7 +4,7 @@
 [Сlick to see result](https://crashmet.github.io/Avia_ticket/dist/index)
 --
 ```
-HI, this is my first project on Webpack
+HI, this is my first project on Webpack and Jest
 ```
 
 
@@ -29,3 +29,5 @@ npm run build
 - ООП, class (ES6), protorype (наследование)
 - Разделение приложения на компоненты
 - Модули export/import (инкапсуляция)
+- Unit тестирование при помощи фреймворка Jest
+- Настройка eslint and prettier
